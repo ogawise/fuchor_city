@@ -1,34 +1,179 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Fuchor City Guest House - Luxury Minimalist Design System */
+
+/* Font Loading - Suisse International with fallback */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap');
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Foundation Colors - Warm Neutral Palette */
+:root {
+  /* Primary Backgrounds - Warm foundation */
+  --bg-primary: #fffef2;
+  --bg-secondary: #f6f5e8;
+  --bg-subtle: #ebeade;
+  
+  /* Text Hierarchy */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-light: #bcbbb4;
+  --text-meta: #4a4a4a;
+  
+  /* Interactive States */
+  --interactive-base: #333333;
+  --interactive-hover: #000000;
+  --focus-outline: #252525;
+  
+  /* Borders */
+  --border-light: #bcbbb4;
+  --border-medium: #cccccc;
+  --border-subtle: rgba(51,51,51,0.2);
+  
+  /* Status */
+  --status-success: #4a4a4a;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-link {
-    color: #61dafb;
+.App {
+  background: var(--bg-primary);
+  min-height: 100vh;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Typography Scale */
+.hero-large {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.33;
+  color: var(--text-primary);
+}
+
+.hero-medium {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.33;
+  color: var(--text-primary);
+}
+
+.heading-1 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.heading-2 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.heading-3 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.body-large {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.body-regular {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.body-small {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* Container System */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .hero-large {
+    font-size: 24px;
+  }
+  
+  .hero-medium {
+    font-size: 20px;
+  }
+}
+
+/* Section Spacing */
+.section-padding {
+  padding: 120px 0;
+}
+
+.section-padding-small {
+  padding: 80px 0;
+}
+
+@media (max-width: 1024px) {
+  .section-padding {
+    padding: 80px 0;
+  }
+  
+  .section-padding-small {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+  
+  .section-padding-small {
+    padding: 40px 0;
+  }
+}
+
+/* Transition Standards */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(.645,.045,.355,1);
+}
+
+.transition-slow {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
 }
