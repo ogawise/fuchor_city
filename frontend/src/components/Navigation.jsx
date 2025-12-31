@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -15,6 +16,28 @@ const Navigation = () => {
     { name: 'Location', path: '/location' },
     { name: 'Contact', path: '/contact' }
   ];
+
+  // Scroll to top when navigating to a new page
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname]);
+
+  const handleNavClick = (path) => {
+    setMobileMenuOpen(false);
+    navigate(path);
+    // Ensure scroll to top
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
 
   const handleWhatsApp = () => {
     window.open('https://wa.me/237653207528', '_blank');
