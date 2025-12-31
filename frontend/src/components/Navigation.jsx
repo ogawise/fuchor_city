@@ -96,13 +96,13 @@ const Navigation = () => {
             <ul className="mobile-menu-links">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
+                  <button
+                    onClick={() => handleNavClick(link.path)}
                     className={`mobile-menu-link ${location.pathname === link.path ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
+                    style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
                   >
                     {link.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
