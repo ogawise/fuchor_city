@@ -59,12 +59,13 @@ const Navigation = () => {
           <ul className="navigation-menu">
             {navLinks.map((link) => (
               <li key={link.path}>
-                <Link
-                  to={link.path}
+                <button
+                  onClick={() => handleNavClick(link.path)}
                   className={`navigation-link ${location.pathname === link.path ? 'active' : ''}`}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                 >
                   {link.name}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
