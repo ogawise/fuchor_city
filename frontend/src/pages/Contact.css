@@ -1,0 +1,185 @@
+.contact-page {
+  background: var(--bg-primary);
+}
+
+.contact-hero {
+  padding: 120px 0 80px;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.contact-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-method-card {
+  text-align: center;
+  padding: 48px 32px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-method-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contact-method-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.booking-form-section {
+  background: var(--bg-secondary);
+}
+
+.booking-form-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--bg-primary);
+  padding: 48px;
+  border: 1px solid var(--border-subtle);
+}
+
+.booking-form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.form-input,
+.form-textarea {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 0px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--text-primary);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-submit {
+  width: 100%;
+  background: var(--interactive-base);
+  color: var(--bg-primary);
+  border: 1px solid var(--interactive-base);
+  border-radius: 0px;
+  padding: 19px 23px;
+  height: 60px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(.645,.045,.355,1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  background: var(--interactive-hover);
+  border-color: var(--interactive-hover);
+}
+
+.faq-section {
+  background: var(--bg-primary);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  padding: 32px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 80px 0 60px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-form-wrapper {
+    padding: 32px 24px;
+  }
+  
+  .contact-methods-grid,
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-hero {
+    padding: 60px 0 40px;
+  }
+  
+  .booking-form-wrapper {
+    padding: 24px 16px;
+  }
+}
