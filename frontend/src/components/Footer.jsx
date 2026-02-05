@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, MapPin } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from './BookingFormModal';
 import './Footer.css';
 
 const Footer = () => {
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/237653207528', '_blank');
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Ready to book?', {
+      description: 'Fill out the booking form to reserve your stay',
+      duration: 3000
+    });
   };
 
   const handleCall = () => {
     window.location.href = 'tel:+237653207528';
+    toast.success('Opening phone dialer...', {
+      duration: 2000
+    });
   };
 
   return (
@@ -53,8 +64,8 @@ const Footer = () => {
 
           <div className="footer-section">
             <h4 className="footer-heading">Book Your Stay</h4>
-            <button onClick={handleWhatsApp} className="btn-primary-footer">
-              Book on WhatsApp
+            <button onClick={handleBookNow} className="btn-primary-footer">
+              Book Now
             </button>
           </div>
         </div>
@@ -65,6 +76,11 @@ const Footer = () => {
           </p>
         </div>
       </div>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </footer>
   );
 };

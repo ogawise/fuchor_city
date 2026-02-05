@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Check } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './Rates.css';
 
 const Rates = () => {
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/237653207528', '_blank');
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const handleBookNow = (plan = null) => {
+    setSelectedPlan(plan);
+    setIsBookingModalOpen(true);
+    toast.info('Complete your booking', {
+      description: plan ? `Booking for ${plan.duration} stay` : 'Fill out the form to proceed',
+      duration: 3000
+    });
   };
 
   const pricingPlans = [
@@ -102,7 +112,7 @@ const Rates = () => {
                     ))}
                   </ul>
                 </div>
-                <button onClick={handleWhatsApp} className="btn-pricing">
+                <button onClick={() => handleBookNow(plan)} className="btn-pricing">
                   Book This Stay
                 </button>
               </div>
@@ -119,12 +129,20 @@ const Rates = () => {
             <p className="body-large" style={{ marginTop: '16px', color: 'var(--text-secondary)' }}>
               We offer custom discounts for extended reservations beyond 7 days. Contact us directly to discuss your requirements and get a personalized quote.
             </p>
-            <button onClick={handleWhatsApp} className="btn-primary" style={{ marginTop: '32px' }}>
+            <button onClick={() => handleBookNow()} className="btn-primary" style={{ marginTop: '32px' }}>
               Contact Us for Custom Rates
             </button>
           </div>
         </div>
       </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+        initialData={selectedPlan ? {
+          message: `I'm interested in the ${selectedPlan.duration} stay package (${selectedPlan.price} FRS).`
+        } : {}}
+      />
 
       {/* What's Included */}
       <section className="section-padding">

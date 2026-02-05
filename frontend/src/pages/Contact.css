@@ -23,12 +23,15 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
 }
 
 .contact-method-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(201, 169, 97, 0.2);
+  border-color: var(--border-medium);
+  background: var(--bg-primary);
 }
 
 .contact-method-icon {
@@ -53,6 +56,13 @@
   background: var(--bg-primary);
   padding: 48px;
   border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 42, 39, 0.1);
+  transition: all 0.3s ease;
+}
+
+.booking-form-wrapper:hover {
+  box-shadow: 0 12px 48px rgba(201, 169, 97, 0.15);
 }
 
 .booking-form-header {
@@ -109,26 +119,32 @@
 
 .btn-submit {
   width: 100%;
-  background: var(--interactive-base);
-  color: var(--bg-primary);
-  border: 1px solid var(--interactive-base);
-  border-radius: 0px;
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+  color: white;
+  border: none;
+  border-radius: 12px;
   padding: 19px 23px;
   height: 60px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(.645,.045,.355,1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   margin-top: 8px;
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.3);
 }
 
 .btn-submit:hover {
-  background: var(--interactive-hover);
-  border-color: var(--interactive-hover);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
 }
 
 .faq-section {

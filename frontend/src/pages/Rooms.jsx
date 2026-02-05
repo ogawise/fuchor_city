@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './Rooms.css';
 
 const Rooms = () => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Ready to book?', {
+      description: 'Fill out the form to reserve your stay',
+      duration: 3000
+    });
+  };
+
   const rooms = [
     {
       title: 'Master Bedroom',
@@ -145,6 +158,27 @@ const Rooms = () => {
           </div>
         </div>
       </section>
+
+      {/* Booking CTA Section */}
+      <section className="section-padding" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="hero-medium">Ready to Experience These Spaces?</h2>
+            <p className="body-regular" style={{ color: 'var(--text-secondary)', marginTop: '16px' }}>
+              Book your stay now and enjoy all our premium amenities
+            </p>
+            <button onClick={handleBookNow} className="btn-primary" style={{ marginTop: '32px' }}>
+              Book Your Stay
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </div>
   );
 };

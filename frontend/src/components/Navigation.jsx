@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from './BookingFormModal';
 import './Navigation.css';
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -39,12 +42,20 @@ const Navigation = () => {
     }, 100);
   };
 
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/237653207528', '_blank');
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    setMobileMenuOpen(false);
+    toast.info('Complete your booking', {
+      description: 'Fill out the form to reserve your stay',
+      duration: 3000
+    });
   };
 
   const handleCall = () => {
     window.location.href = 'tel:+237653207528';
+    toast.success('Opening phone dialer...', {
+      duration: 2000
+    });
   };
 
   return (
@@ -75,7 +86,7 @@ const Navigation = () => {
             <button onClick={handleCall} className="btn-icon" aria-label="Call us">
               <Phone size={18} />
             </button>
-            <button onClick={handleWhatsApp} className="btn-primary-small">
+            <button onClick={handleBookNow} className="btn-primary-small">
               Book Now
             </button>
           </div>
@@ -111,13 +122,18 @@ const Navigation = () => {
                 <Phone size={18} />
                 Call Us
               </button>
-              <button onClick={handleWhatsApp} className="btn-primary-mobile">
-                Book on WhatsApp
+              <button onClick={handleBookNow} className="btn-primary-mobile">
+                Book Now
               </button>
             </div>
           </div>
         )}
       </div>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </nav>
   );
 };

@@ -110,19 +110,21 @@
 .btn-pricing {
   width: 100%;
   background: transparent;
-  color: var(--interactive-base);
-  border: 1px solid var(--interactive-base);
-  border-radius: 0px;
+  color: var(--gold-primary);
+  border: 2px solid var(--gold-primary);
+  border-radius: 8px;
   padding: 16px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(.645,.045,.355,1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-pricing:hover {
-  background: var(--interactive-base);
-  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.3);
 }
 
 .custom-rates-section {
@@ -137,25 +139,32 @@
 }
 
 .btn-primary {
-  background: transparent;
-  color: var(--interactive-base);
-  border: 1px solid var(--interactive-base);
-  border-radius: 0px;
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+  color: white;
+  border: none;
+  border-radius: 12px;
   padding: 19px 23px;
   min-width: 210px;
   height: 60px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(.645,.045,.355,1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--interactive-base);
-  color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 169, 97, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .section-header {

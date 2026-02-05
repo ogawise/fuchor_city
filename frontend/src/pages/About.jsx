@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './About.css';
 
 const About = () => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Ready to book your stay?', {
+      description: 'Fill out the form to reserve your accommodation',
+      duration: 3000
+    });
+  };
+
   return (
     <div className="about-page">
       {/* Hero Section */}
@@ -108,9 +121,20 @@ const About = () => {
             <p className="body-large" style={{ marginTop: '24px', maxWidth: '800px', margin: '24px auto 0' }}>
               Whether you're visiting for a festive occasion, a romantic getaway, or simply need a comfortable place for a short stay, we promise to provide an experience that exceeds your expectations. Your comfort, privacy, and satisfaction are our top priorities.
             </p>
+            <div style={{ marginTop: '40px', textAlign: 'center' }}>
+              <button onClick={handleBookNow} className="btn-primary">
+                Book Your Stay
+                <ArrowRight size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </div>
   );
 };

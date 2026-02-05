@@ -1,59 +1,33 @@
 import React, { useState } from 'react';
-import { Phone, MessageCircle, MapPin, Send } from 'lucide-react';
+import { Phone, MessageCircle, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './Contact.css';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    checkIn: '',
-    checkOut: '',
-    guests: '2',
-    message: ''
-  });
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Complete your booking request', {
+      description: 'Fill out the form to proceed with your reservation',
+      duration: 3000
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Validate form
-    if (!formData.name || !formData.phone || !formData.checkIn) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-    
-    // Format WhatsApp message
-    const message = `Hello! I'd like to book a stay at Fuchor City Guest House:
-
-Name: ${formData.name}
-Phone: ${formData.phone}
-Check-in: ${formData.checkIn}
-Check-out: ${formData.checkOut || 'To be discussed'}
-Number of Guests: ${formData.guests}
-${formData.message ? `\nAdditional Notes: ${formData.message}` : ''}`;
-    
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/237653207528?text=${encodedMessage}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
-    toast.success('Redirecting to WhatsApp...');
-  };
-
-  const handleWhatsApp = () => {
+  const handleWhatsAppDirect = () => {
     window.open('https://wa.me/237653207528', '_blank');
+    toast.info('Opening WhatsApp', {
+      description: 'You can also use the booking form for a structured request',
+      duration: 3000
+    });
   };
 
   const handleCall = () => {
     window.location.href = 'tel:+237653207528';
+    toast.success('Opening phone dialer...', {
+      duration: 2000
+    });
   };
 
   return (
@@ -72,16 +46,16 @@ ${formData.message ? `\nAdditional Notes: ${formData.message}` : ''}`;
       <section className="section-padding">
         <div className="container">
           <div className="contact-methods-grid">
-            <div className="contact-method-card" onClick={handleWhatsApp}>
+            <div className="contact-method-card" onClick={handleBookNow}>
               <div className="contact-method-icon">
                 <MessageCircle size={32} />
               </div>
-              <h3 className="heading-2">WhatsApp</h3>
+              <h3 className="heading-2">Book Your Stay</h3>
               <p className="body-regular" style={{ marginTop: '12px', color: 'var(--text-secondary)' }}>
-                Quick and easy booking via WhatsApp
+                Fill out our booking form for a structured reservation request
               </p>
-              <p className="body-large" style={{ marginTop: '16px', fontWeight: 600 }}>
-                +237 653 207 528
+              <p className="body-small" style={{ marginTop: '16px', fontWeight: 500, color: 'var(--interactive-base)' }}>
+                Click to open booking form →
               </p>
             </div>
             <div className="contact-method-card" onClick={handleCall}>
@@ -112,103 +86,39 @@ ${formData.message ? `\nAdditional Notes: ${formData.message}` : ''}`;
         </div>
       </section>
 
-      {/* Booking Form */}
+      {/* Booking Form CTA */}
       <section className="booking-form-section section-padding">
         <div className="container">
           <div className="booking-form-wrapper">
             <div className="booking-form-header">
               <h2 className="hero-medium">Book Your Stay</h2>
               <p className="body-regular" style={{ marginTop: '16px', color: 'var(--text-secondary)' }}>
-                Fill out the form below and we'll contact you via WhatsApp to confirm your booking
+                Fill out our booking form and we'll contact you via WhatsApp to confirm your reservation
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="booking-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name" className="form-label">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="form-input"
-                    placeholder="Your full name"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone" className="form-label">Phone Number *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="form-input"
-                    placeholder="+237 XXX XXX XXX"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="checkIn" className="form-label">Check-in Date *</label>
-                  <input
-                    type="date"
-                    id="checkIn"
-                    name="checkIn"
-                    value={formData.checkIn}
-                    onChange={handleChange}
-                    className="form-input"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="checkOut" className="form-label">Check-out Date</label>
-                  <input
-                    type="date"
-                    id="checkOut"
-                    name="checkOut"
-                    value={formData.checkOut}
-                    onChange={handleChange}
-                    className="form-input"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="guests" className="form-label">Number of Guests</label>
-                <select
-                  id="guests"
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleChange}
-                  className="form-input"
-                >
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5+">5+ Guests</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="message" className="form-label">Additional Notes</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="form-textarea"
-                  rows="4"
-                  placeholder="Any special requests or questions?"
-                ></textarea>
-              </div>
-              <button type="submit" className="btn-submit">
-                <Send size={18} />
-                Send Booking Request via WhatsApp
+            <div style={{ textAlign: 'center', marginTop: '32px' }}>
+              <button onClick={handleBookNow} className="btn-submit" style={{ maxWidth: '400px' }}>
+                <MessageCircle size={18} />
+                Open Booking Form
               </button>
-            </form>
+              <p className="body-small" style={{ marginTop: '16px', color: 'var(--text-secondary)' }}>
+                Or contact us directly via{' '}
+                <button 
+                  onClick={handleWhatsAppDirect}
+                  style={{ 
+                    color: 'var(--interactive-base)', 
+                    textDecoration: 'underline',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                    fontSize: 'inherit'
+                  }}
+                >
+                  WhatsApp
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -223,7 +133,7 @@ ${formData.message ? `\nAdditional Notes: ${formData.message}` : ''}`;
             <div className="faq-item">
               <h3 className="heading-3">How do I make a reservation?</h3>
               <p className="body-regular" style={{ marginTop: '12px', color: 'var(--text-secondary)' }}>
-                You can book directly via WhatsApp, call us, or use the booking form above. We'll confirm your reservation immediately.
+                Click on any "Book Now" button to open our booking form. Fill it out and submit - we'll contact you via WhatsApp to confirm your reservation immediately.
               </p>
             </div>
             <div className="faq-item">
@@ -247,6 +157,11 @@ ${formData.message ? `\nAdditional Notes: ${formData.message}` : ''}`;
           </div>
         </div>
       </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </div>
   );
 };

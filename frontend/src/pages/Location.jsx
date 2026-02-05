@@ -1,8 +1,20 @@
-import React from 'react';
-import { MapPin, Navigation } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Navigation, ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './Location.css';
 
 const Location = () => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Book your stay', {
+      description: 'Fill out the form and we can arrange pickup for you',
+      duration: 3000
+    });
+  };
+
   return (
     <div className="location-page">
       {/* Hero Section */}
@@ -135,9 +147,23 @@ const Location = () => {
             <p className="body-large" style={{ marginTop: '24px', maxWidth: '800px', margin: '24px auto 0' }}>
               We understand that navigating a new city can be challenging. That's why we offer complimentary pickup and drop-off service to all our guests. Contact us when you're ready to arrive or depart, and we'll handle the rest.
             </p>
+            <div style={{ marginTop: '40px', textAlign: 'center' }}>
+              <button onClick={handleBookNow} className="btn-primary">
+                Book Now & Arrange Pickup
+                <ArrowRight size={18} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+        initialData={{
+          message: 'I would like to arrange free transportation pickup service.'
+        }}
+      />
     </div>
   );
 };

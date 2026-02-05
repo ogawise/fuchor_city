@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
+import { toast } from 'sonner';
+import BookingFormModal from '../components/BookingFormModal';
 import './Home.css';
 
 const Home = () => {
-  const handleWhatsApp = () => {
-    window.open('https://wa.me/237653207528', '_blank');
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsBookingModalOpen(true);
+    toast.info('Please fill out the booking form', {
+      description: 'We need a few details to process your reservation',
+      duration: 3000
+    });
   };
 
   const handleCall = () => {
     window.location.href = 'tel:+237653207528';
+    toast.success('Opening phone dialer...', {
+      duration: 2000
+    });
   };
 
   const amenities = [
@@ -41,8 +52,8 @@ const Home = () => {
               Experience refined hospitality in the heart of Bomaka. A thoughtfully designed space offering luxury, privacy, and all the amenities you need for an unforgettable stay.
             </p>
             <div className="hero-actions">
-              <button onClick={handleWhatsApp} className="btn-primary">
-                Book Now on WhatsApp
+              <button onClick={handleBookNow} className="btn-primary">
+                Book Now
                 <ArrowRight size={18} />
               </button>
               <button onClick={handleCall} className="btn-secondary">
@@ -154,14 +165,19 @@ const Home = () => {
               Book your stay today and discover why guests choose Fuchor City Guest House
             </p>
             <div className="cta-actions">
-              <button onClick={handleWhatsApp} className="btn-primary">
-                Book on WhatsApp
+              <button onClick={handleBookNow} className="btn-primary">
+                Book Your Stay
                 <ArrowRight size={18} />
               </button>
             </div>
           </div>
         </div>
       </section>
+
+      <BookingFormModal 
+        open={isBookingModalOpen} 
+        onOpenChange={setIsBookingModalOpen}
+      />
     </div>
   );
 };
